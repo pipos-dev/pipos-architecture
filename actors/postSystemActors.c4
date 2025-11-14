@@ -1,0 +1,13 @@
+model{
+    admin = personEmployee 'Administrator' {
+        description 'manages the system'
+    }
+
+    cashier = personEmployee 'Cashier' {
+        description 'processes customer transactions'
+    }
+
+    customer = personCustomer 'Customer' {
+        description 'purchases products from the store'
+    }
+}

@@ -1,0 +1,65 @@
+model {
+
+    extend posSystem {
+
+        backendApi = container 'Backend API' {
+            description 'REST API server handling business logic, transactions, inventory, and cash register operations'
+            technology 'Python 3.13, FastAPI, Prisma ORM'
+            icon tech:fast-api
+        }
+
+        database = database 'PostgreSQL Database' {
+            description 'Stores all business data: products, sales, customers, cash registers, users, and transactions'
+            technology 'PostgreSQL, Prisma Migrations'
+            icon tech:postgresql
+        }
+
+        webDashboard = webapp 'Web Admin Dashboard' {
+            description 'Administrative web application for system configuration, reports, and management'
+            technology 'Next.js 15, React 19, TypeScript, TailwindCSS'
+            icon tech:nextjs
+        }
+
+        mobileApp = mobileapp 'Mobile POS App' {
+            description 'Native mobile application for cashiers to process sales, manage cash register, and handle transactions'
+            technology 'React 19, TypeScript, Capacitor, TailwindCSS'
+            icon tech:react
+        }
+
+        // Container Relationships
+        posSystem.backendApi -> posSystem.database 'reads from and writes to' {
+            technology 'Prisma Client, SQL/TCP'
+        }
+
+        webDashboard -> posSystem.backendApi 'makes API calls to' {
+            technology 'REST API, JSON/HTTPS, Axios'
+        }
+
+        mobileApp -> posSystem.backendApi 'makes API calls to' {
+            technology 'REST API, JSON/HTTPS'
+        }
+
+        backendApi -> electronicBilling 'sends electronic invoices to' {
+            technology 'REST API/JSON'
+        }
+
+        webDashboard -> auth0 'authenticates users via' {
+            technology 'OAuth 2.0, OpenID Connect'
+        }
+
+        mobileApp -> auth0 'authenticates users via' {
+            technology 'OAuth 2.0, OpenID Connect'
+        }
+
+        backendApi -> auth0 'validates tokens with' {
+            technology 'JWT, OAuth 2.0'
+        }
+
+        // User interactions
+        admin -> webDashboard 'uses for system administration'
+        cashier -> mobileApp 'uses for sales and cash operations'
+        customer -> mobileApp 'interacts during purchase'
+    }
+
+
+}

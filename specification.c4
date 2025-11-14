@@ -1,0 +1,138 @@
+specification {
+
+  color component #412b09ff
+  color SoftwareSystem #00050aff
+  color office365 #c0731aff
+  color azure #0075d4ff
+
+  tag V1{
+    color #c57f16ff
+  }
+
+  tag V2{
+    color #910251ff
+  }
+
+  tag EntornoTeams{
+    color #9c9e2bff
+  }
+
+  tag EntornoProcess{
+    color #ff0000ff
+  }
+
+  tag Abstraction{
+    color #808080ff
+  }
+
+  // Elementos de contexto
+  element personEmployee {
+    notation "Empleado"
+    style {
+      color red
+      shape person
+    }
+  }
+
+  element personCustomer {
+    notation "Cliente"
+    style {
+      color green
+      shape person
+    }
+  }
+  
+  element system{
+    notation "Sistema de Software Interno"
+    style {
+      color SoftwareSystem
+      shape rectangle
+    }
+  }
+  
+  element external {
+    notation "Sistema Externo o de Terceros"
+    style {
+      color muted
+    }
+  }
+  
+  // Elementos de contenedor
+  element container{
+    notation "Contenedor - Aplicación o Servicio"
+    style {
+      color secondary
+      shape rectangle
+    }
+  }
+
+  element database{
+    notation "Base de Datos"
+    style {
+      color secondary
+      shape cylinder
+    }
+  }
+
+  element webapp{
+    notation "Aplicación Web"
+    style {
+      color secondary
+      shape browser
+    }
+  }
+
+  element mobileapp{
+    notation "Aplicación Móvil Nativa"
+    style {
+      color secondary
+      shape mobile
+    }
+  }
+
+  element queue {
+    notation "Cola de Mensajes"
+    style{
+      color secondary
+      shape queue
+    }
+  }
+  
+  element api {
+    notation "API REST o Servicio Web"
+  }
+  
+  // Elementos de componente
+  element component {
+    notation "Componente de Software"
+    style {
+      color component
+      shape rectangle
+    }
+  }
+  
+  element service {
+    notation "Servicio o Microservicio"
+  }
+  
+  element controller {
+    notation "Controlador o Endpoint"
+  }
+
+  // TIPOS DE NODOS DE DESPLIEGUE
+  
+  deploymentNode environment {
+    style {
+      color gray
+    }
+  }
+
+  deploymentNode cloud {
+  }
+
+  deploymentNode node {
+    style {
+      border dotted
+    }
+  }
+}

@@ -1,0 +1,59 @@
+deployment {
+
+    environment production {
+        description 'Production Environment for Point of Sale System'
+
+        cloud azure 'Microsoft Azure' {
+            description 'Microsoft Azure Cloud Infrastructure'
+            style{
+                icon tech:azure
+            }
+
+            node appService {
+                description 'Azure App Service hosting the Point of Sale System backend API'
+                style {
+                    icon azure:app-services
+                }
+
+                instanceOf posSystem.backendApi
+            }
+
+        }
+
+        cloud vercel 'Vercel Cloud' {
+            description 'Vercel Cloud Infrastructure for Frontend Applications'
+
+            node webAppService 'Next.js 15' {
+                description 'Vercel hosting the Web Admin Dashboard'
+                style {
+                    icon tech:vercel
+                }
+
+                instanceOf posSystem.webDashboard
+            }
+        }
+
+        node mobileAppService 'Android 9/ IOS 15' {
+            description 'Vercel hosting the Mobile POS App'
+            style {
+                icon: tech:android
+            }
+
+            instanceOf posSystem.mobileApp
+        }
+
+        cloud neon {
+            description 'Neon Cloud Database Service'
+
+            node postgreSQLInstance 'PostgreSQL 16' {
+                description 'Neon PostgreSQL Database Instance for storing business data'
+                style {
+                    icon tech:postgresql
+                }
+
+                instanceOf posSystem.database
+            }
+
+        }
+    }
+}

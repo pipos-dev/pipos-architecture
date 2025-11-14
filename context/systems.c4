@@ -1,0 +1,29 @@
+model{
+
+    posSystem = system 'Point of Sale System' {
+        description 'Handles sales transactions and inventory management for a retail store'
+    }
+
+    electronicBilling = external 'Electronic Billing Service' {
+        description 'Third-party service for processing electronic invoices'
+    }
+
+    auth0 = external 'Auth0' {
+        description 'Third-party authentication and authorization service'
+        style {
+            icon https://images.icon-icons.com/2699/PNG/512/auth_logo_icon_169534.png
+        }
+    }
+
+    // Relationships
+    admin -> posSystem 'manages the system'
+    cashier -> posSystem 'processes customer transactions'
+    customer -> posSystem 'purchases products from the store'
+    posSystem -> electronicBilling 'sends electronic invoices to'{
+        technology 'REST API/JSON'
+    }
+    posSystem -> auth0 'authenticates users via' {
+        technology 'OAuth 2.0, OpenID Connect'
+    }
+
+}

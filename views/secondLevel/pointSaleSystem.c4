@@ -1,0 +1,8 @@
+views{
+    view pipos of posSystem {
+        title 'Level 2 - Containers / Container Diagram for Point of Sale System'
+        description 'This diagram shows the containers within the Point of Sale System and their interactions'
+
+        include *
+    }
+}

@@ -1,0 +1,8 @@
+views{
+    view systemContext {
+        title 'Level 1 - Context / System Context Diagram for Point of Sale System'
+        description 'This diagram shows the Point of Sale System and its interactions with external systems and users'
+
+        include *
+    } 
+}

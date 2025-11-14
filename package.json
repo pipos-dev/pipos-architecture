@@ -1,0 +1,22 @@
+{
+  "name": "architecture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "likec4 serve",
+    "build": "likec4 build -o ./dist",
+    "export": "likec4 export png -o ./exports",
+    "export:dark": "likec4 export png -o ./exports --dark",
+    "export:json": "likec4 export json -o ./exports",
+    "validate": "likec4 validate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "likec4": "^1.44.0"
+  }
+}
