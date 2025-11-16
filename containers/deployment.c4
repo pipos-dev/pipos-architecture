@@ -9,7 +9,7 @@ deployment {
                 icon tech:azure
             }
 
-            node appService {
+            node appService 'Azure App Service F1' {
                 description 'Azure App Service hosting the Point of Sale System backend API'
                 style {
                     icon azure:app-services
@@ -21,7 +21,7 @@ deployment {
         }
 
         cloud vercel 'Vercel Cloud' {
-            description 'Vercel Cloud Infrastructure for Frontend Applications'
+            description 'Vercel Cloud Infrastructure'
 
             node webAppService 'Next.js 15' {
                 description 'Vercel hosting the Web Admin Dashboard'
@@ -42,8 +42,11 @@ deployment {
             instanceOf posSystem.mobileApp
         }
 
-        cloud neon {
-            description 'Neon Cloud Database Service'
+        cloud neon 'Free Neon Cloud Database Service' {
+            description 'Neon Cloud Database Service Free Tier'
+            style{
+                icon https://ml.globenewswire.com/Resource/Download/82e79fc7-1654-41e7-af70-f5857596743c
+            }
 
             node postgreSQLInstance 'PostgreSQL 16' {
                 description 'Neon PostgreSQL Database Instance for storing business data'

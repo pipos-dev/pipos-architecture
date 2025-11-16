@@ -7,7 +7,9 @@ views{
         production.**,
         production.azure,
         production.webAppService,
-        production.appService
+        production.appService,
+        production.postgreSQLInstance
+
       style production.vercel {
         color indigo
       }
