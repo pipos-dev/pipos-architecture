@@ -4,5 +4,16 @@ views{
         description 'This diagram shows the containers within the Point of Sale System and their interactions'
 
         include *
+        where tag is #V1
+
+    }
+
+    view piposV2 of posSystem {
+        title 'Level 2 - Containers / Point of Sale System V2 (Azure Service Bus Architecture)'
+        description 'V2 introduces asynchronous event-driven communication using Azure Service Bus for improved scalability, reliability, and microservice decoupling'
+
+        include *
+        where tag is #V2
+        exclude electronicBilling
     }
 }

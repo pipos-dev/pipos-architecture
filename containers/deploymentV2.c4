@@ -1,6 +1,6 @@
 deployment {
 
-    environment production1 {
+    environment production2 {
         description 'Production Environment for Point of Sale System'
 
         cloud azure 'Microsoft Azure' {
@@ -16,6 +16,24 @@ deployment {
                 }
 
                 instanceOf posSystem.backendApi
+            }
+
+            node appService2 'Node: Azure App Service F1' {
+                description 'Azure App Service hosting the Point of Sale System Electronic Billing Microservice'
+                style {
+                    icon azure:app-services
+                }
+
+                instanceOf posSystem.electronicBillingMicroservice
+            }
+
+            node serviceBus 'Node: Azure Service Bus' {
+                description 'Azure Service Bus for handling billing events and asynchronous processing'
+                style {
+                    icon tech:azure
+                }
+
+                instanceOf posSystem.messageBroker
             }
 
         }
@@ -38,8 +56,9 @@ deployment {
             style {
                 icon: tech:android
             }
-
+            instanceOf posSystem.sqlite
             instanceOf posSystem.mobileApp
+            
         }
 
         cloud neon 'Free Neon Cloud Database Service' {
@@ -55,6 +74,15 @@ deployment {
                 }
 
                 instanceOf posSystem.database
+            }
+
+            node electronicBillingDatabaseInstance 'Node: PostgreSQL 16' {
+                description 'Neon PostgreSQL Database Instance for storing electronic billing data'
+                style {
+                    icon tech:postgresql
+                }
+
+                instanceOf posSystem.electronicBillingDatabase
             }
 
         }

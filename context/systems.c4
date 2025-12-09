@@ -1,14 +1,20 @@
 model{
 
     posSystem = system 'Point of Sale System' {
+        #V1 #V2
         description 'Handles sales transactions and inventory management for a retail store'
     }
 
     electronicBilling = external 'Electronic Billing Service' {
+        #V1
         description 'Third-party service for processing electronic invoices'
+        style {
+            icon https://developers.factus.com.co/_astro/factus-logo-dark.BlZunxaw.png 
+        }
     }
 
     auth0 = external 'Auth0' {
+        #V1 #V2
         description 'Third-party authentication and authorization service'
         style {
             icon https://images.icon-icons.com/2699/PNG/512/auth_logo_icon_169534.png
@@ -25,5 +31,6 @@ model{
     posSystem -> auth0 'authenticates users via' {
         technology 'OAuth 2.0, OpenID Connect'
     }
+
 
 }

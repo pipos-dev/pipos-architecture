@@ -3,27 +3,58 @@ model {
     extend posSystem {
 
         backendApi = container 'Backend API' {
+            #V1 #V2
             description 'REST API server handling business logic, transactions, inventory, and cash register operations'
             technology 'Python 3.13, FastAPI, Prisma ORM'
             icon tech:fast-api
         }
 
         database = database 'PostgreSQL Database' {
+            #V1 #V2
             description 'Stores all business data: products, sales, customers, cash registers, users, and transactions'
             technology 'PostgreSQL, Prisma Migrations'
             icon tech:postgresql
         }
 
         webDashboard = webapp 'Web Admin Dashboard' {
+            #V1 #V2
             description 'Administrative web application for system configuration, reports, and management'
             technology 'Next.js 15, React 19, TypeScript, TailwindCSS'
             icon tech:nextjs
         }
 
         mobileApp = mobileapp 'Mobile POS App' {
+            #V1 #V2
             description 'Native mobile application for cashiers to process sales, manage cash register, and handle transactions'
             technology 'React 19, TypeScript, Capacitor, TailwindCSS'
             icon tech:react
+        }
+        
+        sqlite = database 'SQLite Database' {
+            #V2
+            description 'Lightweight database for local data storage on mobile devices'
+            style {
+                icon tech:sqlite
+            }
+        }
+
+        electronicBillingMicroservice = container 'Electronic Billing MicroService' {
+            #V2
+            description 'Microservice responsible for communicating with the Electronic Billing Service to process and send electronic invoices'
+            icon tech:fast-api
+        }
+
+        electronicBillingDatabase = database 'Electronic Billing Database' {
+            #V2
+            description 'Database used by the Electronic Billing Microservice to store invoice data'
+            icon tech:postgresql
+        }
+
+        messageBroker = queue'Azure Service Bus' {
+            #V2
+            description 'Cloud messaging service for decoupling applications and services. Handles billing events and asynchronous processing'
+            technology 'Azure Service Bus'
+            icon tech:azure
         }
 
         // Container Relationships
@@ -55,11 +86,40 @@ model {
             technology 'JWT, OAuth 2.0'
         }
 
+        // V2 Message Broker relationships (Azure Service Bus)
+        backendApi -> messageBroker 'publishes billing events to' {
+            #V2
+            technology 'AMQP / Azure SDK'
+        }
+
+        messageBroker -> electronicBillingMicroservice 'delivers billing events to' {
+            #V2
+            technology 'Azure Service Bus Trigger'
+        }
+
+        electronicBillingMicroservice -> messageBroker 'publishes processing status to' {
+            #V2
+            technology 'Azure Service Bus Topic'
+        }
+
+        messageBroker -> backendApi 'notifies completion status' {
+            #V2
+            technology 'Azure Service Bus Subscription'
+        }
+
+        electronicBillingMicroservice -> electronicBillingDatabase 'reads from and writes to' {
+            #V2
+            technology 'PostgreSQL, Prisma Client'
+        }
+
+        mobileApp -> sqlite 'reads from and writes to' {
+            #V2
+            technology 'SQLite, SQL'
+        }
+
         // User interactions
         admin -> webDashboard 'uses for system administration'
         cashier -> mobileApp 'uses for sales and cash operations'
         customer -> mobileApp 'interacts during purchase'
     }
-
-
 }

@@ -1,0 +1,64 @@
+views {
+    deployment view piposDeploymentV2 {
+        title 'V2 / Deployment / Deployment Diagram for Point of Sale System'
+        description 'This diagram shows the deployment of the Point of Sale System software components to the infrastructure nodes'
+
+        include
+            *,
+            production2.**,
+            production2.azure,
+            production2.webAppService,
+            production2.appService,
+            production2.postgreSQLInstance,
+            production2.appService2,
+            production2.sqlite
+
+        exclude
+            production1,
+            production1.**
+
+        style production2.vercel {
+        color indigo
+      }
+        style production2.vercel.webAppService.webDashboard {
+        color sky
+      }
+        style production2.mobileAppService.mobileApp {
+        color sky
+      }
+        style production2.mobileAppService {
+        color green
+      }
+        style production2.azure.appService {
+        color blue
+      }
+        style production2.azure.appService.backendApi {
+        color component
+      }
+        style production2.azure.appService2 {
+        color blue
+      }
+        style production2.azure.appService2.electronicBillingMicroservice {
+        color red
+      }
+        style production2.neon {
+        color sky
+      }
+        style production2.neon.postgreSQLInstance.database {
+        color amber
+      }
+        style production2.azure {
+        color red
+      }
+       style production2.azure.serviceBus.messageBroker {
+        color green
+       }
+       style production2.electronicBillingDatabaseInstance.electronicBillingDatabase {
+        color amber
+       }
+       style production2.mobileAppService.sqlite {
+        color component
+       }
+
+    }
+}
